@@ -18,6 +18,7 @@ ExternalProject_Add(oatpp
 ExternalProject_Add(oatpp-consul
         GIT_REPOSITORY "https://github.com/oatpp/oatpp-consul.git"
         GIT_TAG origin/master
+        DEPENDS oatpp
 )
 
 ExternalProject_Add(main
