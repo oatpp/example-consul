@@ -1,1 +1,1 @@
-# example-consul
+# example-consul [![Build Status](https://dev.azure.com/lganzzzo/lganzzzo/_apis/build/status/oatpp.example-consul?branchName=master)](https://dev.azure.com/lganzzzo/lganzzzo/_build?definitionId=15&branchName=master)
