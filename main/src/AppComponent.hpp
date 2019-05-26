@@ -72,7 +72,7 @@ public:
    */
   OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::consul::Client>, consulClient)([] {
 
-    OATPP_LOGD("AppComponent", "Assuming Consul is on port 8500");
+    OATPP_LOGI("AppComponent", "Assuming Consul is on port 8500");
 
     // Create connection provider for Consul
     // In case you need secure connection provider so you can connect to Consul via https see oatpp-libressl and tls-libressl example project
