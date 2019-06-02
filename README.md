@@ -2,13 +2,14 @@
 
 Example project how-to use [oatpp-consul](https://github.com/oatpp/oatpp-consul) module. 
 
-#### More about oat++:
-- Website: [https://oatpp.io](https://oatpp.io)
-- Docs: [https://oatpp.io/docs/start](https://oatpp.io/docs/start)
-- Oat++ Repo: [https://github.com/oatpp/oatpp](https://github.com/oatpp/oatpp)
+See more:
+
+- [Oat++ Website](https://oatpp.io/)
+- [Oat++ Github Repository](https://github.com/oatpp/oatpp)
+- [Get Started](https://oatpp.io/docs/start)
 
 ## Overview
-This project is using `oatpp` and `oatpp-consul` modules.  
+This project is using [oatpp](https://github.com/oatpp/oatpp) and [oatpp-consul](https://github.com/oatpp/oatpp-consul) modules.  
 
 Currently this is trivial example.- Read/Write from/to Consul KV via endpoints declared in Controller.
 More complex example later.  
@@ -18,18 +19,16 @@ In this example Consul is expected to run at port 8500.
 ### Project layout
 
 ```
-- CMakeLists.txt                        // projects CMakeLists.txt
-- src/
-    |
-    |- controller/                      // Folder containing controller where all endpoints are declared
-    |- dto/                             // DTOs are declared here
-    |- AppComponent.hpp                 // Service config
-    |- Logger.hpp                       // Application Logger
-    |- App.cpp                          // main() is here
-
-- test/                                 // test folder
-- utility/install-oatpp-modules.sh      // utility script to install required oatpp-modules.
-    
+|- CMakeLists.txt                        // projects CMakeLists.txt
+|- src/
+|    |
+|    |- controller/                      // Folder containing controller where all endpoints are declared
+|    |- dto/                             // DTOs are declared here
+|    |- AppComponent.hpp                 // Service config
+|    |- App.cpp                          // main() is here
+|
+|- test/                                 // test folder
+|- utility/install-oatpp-modules.sh      // utility script to install required oatpp-modules.
 ```
 
 ---
