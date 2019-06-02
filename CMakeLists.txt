@@ -2,44 +2,44 @@ cmake_minimum_required(VERSION 3.1)
 
 set(project_name example-consul) ## rename your project here
 
-project(${project_name}-loader)
+project(${project_name})
 
-include(ExternalProject)
+set(CMAKE_CXX_STANDARD 11)
 
-#############################################################################
-## load all dependencies
-
-ExternalProject_Add(oatpp
-        GIT_REPOSITORY "https://github.com/oatpp/oatpp.git"
-        GIT_TAG origin/master
-        CMAKE_ARGS -DOATPP_BUILD_TESTS=OFF
+add_library(${project_name}-lib
+        src/AppComponent.hpp
+        src/controller/DemoController.cpp
+        src/controller/DemoController.hpp
+        src/controller/HealthController.hpp
+        src/dto/HealthDto.hpp
 )
 
-ExternalProject_Add(oatpp-consul
-        GIT_REPOSITORY "https://github.com/oatpp/oatpp-consul.git"
-        GIT_TAG origin/master
-        DEPENDS oatpp
+## link libs
+
+find_package(oatpp          0.19.4 REQUIRED)
+find_package(oatpp-consul   0.19.4 REQUIRED)
+
+target_link_libraries(${project_name}-lib
+        PUBLIC oatpp::oatpp
+        PUBLIC oatpp::oatpp-test
+        PUBLIC oatpp::oatpp-consul
 )
 
-ExternalProject_Add(main
-        SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/main
-        INSTALL_COMMAND cmake -E echo "SKIP INSTALL"
-        DEPENDS oatpp oatpp-consul
+target_include_directories(${project_name}-lib PUBLIC src)
+
+## add executables
+
+add_executable(${project_name}-exe
+        src/App.cpp
 )
+target_link_libraries(${project_name}-exe ${project_name}-lib)
+add_dependencies(${project_name}-exe ${project_name}-lib)
 
-#############################################################################
-## make run command
-
-ExternalProject_Get_Property(main BINARY_DIR)
-
-add_custom_target(run
-        COMMAND ${BINARY_DIR}/${project_name}-exe
-        DEPENDS main
-        WORKING_DIRECTORY ${BINARY_DIR}
+add_executable(${project_name}-test
+        test/tests.cpp
 )
-
-#############################################################################
-## make test command
+target_link_libraries(${project_name}-test ${project_name}-lib)
+add_dependencies(${project_name}-test ${project_name}-lib)
 
 enable_testing()
-add_test(all-tests ${BINARY_DIR}/${project_name}-test)
+add_test(project-tests ${project_name}-test)
