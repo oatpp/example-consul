@@ -1,10 +1,3 @@
-//
-//  DemoController.hpp
-//  web-starter-project
-//
-//  Created by Leonid on 2/12/18.
-//  Copyright © 2018 oatpp. All rights reserved.
-//
 
 #ifndef DemoController_hpp
 #define DemoController_hpp
@@ -15,6 +8,8 @@
 #include "oatpp/parser/json/mapping/ObjectMapper.hpp"
 #include "oatpp/core/macro/codegen.hpp"
 #include "oatpp/core/macro/component.hpp"
+
+#include OATPP_CODEGEN_BEGIN(ApiController) //<-- Begin codegen
 
 /**
  *  EXAMPLE ApiController
@@ -44,11 +39,6 @@ public:
   }
   
   /**
-   *  Begin ENDPOINTs generation ('ApiController' codegen)
-   */
-#include OATPP_CODEGEN_BEGIN(ApiController)
-  
-  /**
    *  Insert Your endpoints here !!!
    */
   
@@ -63,13 +53,9 @@ public:
            PATH(String, key)) {
     return createResponse(Status::CODE_200, m_consulClient->kvGet(key));
   }
-
-  
-  /**
-   *  Finish ENDPOINTs generation ('ApiController' codegen)
-   */
-#include OATPP_CODEGEN_END(ApiController)
   
 };
+
+#include OATPP_CODEGEN_END(ApiController) //<-- End codegen
 
 #endif /* DemoController_hpp */

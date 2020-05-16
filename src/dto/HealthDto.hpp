@@ -1,11 +1,3 @@
-//
-//  HealthDto.hpp
-//  consul-integration
-//
-//  Created by Leonid on 7/3/18.
-//  Copyright © 2018 oatpp. All rights reserved.
-//
-
 #ifndef HealthDto_hpp
 #define HealthDto_hpp
 
@@ -18,7 +10,7 @@
  *  Data Transfer Object. Object containing fields only.
  *  Used in API for serialization/deserialization and validation
  */
-class HealthDto : public oatpp::data::mapping::type::Object {
+class HealthDto : public oatpp::Object {
   
   DTO_INIT(HealthDto, Object)
   

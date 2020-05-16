@@ -1,10 +1,3 @@
-//
-//  HealthController.hpp
-//  consul-integration
-//
-//  Created by Leonid on 7/3/18.
-//  Copyright © 2018 oatpp. All rights reserved.
-//
 
 #ifndef HealthController_hpp
 #define HealthController_hpp
@@ -16,6 +9,8 @@
 #include "oatpp/parser/json/mapping/ObjectMapper.hpp"
 #include "oatpp/core/macro/codegen.hpp"
 #include "oatpp/core/macro/component.hpp"
+
+#include OATPP_CODEGEN_BEGIN(ApiController) //<-- Begin codegen
 
 /**
  *  EXAMPLE ApiController
@@ -39,11 +34,6 @@ public:
   }
   
   /**
-   *  Begin ENDPOINTs generation ('ApiController' codegen)
-   */
-#include OATPP_CODEGEN_BEGIN(ApiController)
-  
-  /**
    *  Insert Your endpoints here !!!
    */
   
@@ -57,11 +47,8 @@ public:
     return createDtoResponse(Status::CODE_200, status);
   }
   
-  /**
-   *  Finish ENDPOINTs generation ('ApiController' codegen)
-   */
-#include OATPP_CODEGEN_END(ApiController)
-  
 };
+
+#include OATPP_CODEGEN_END(ApiController) //<-- End codegen
 
 #endif /* HealthController_hpp */
