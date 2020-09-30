@@ -7,8 +7,8 @@
 #include "oatpp/web/client/HttpRequestExecutor.hpp"
 #include "oatpp/web/server/HttpConnectionHandler.hpp"
 #include "oatpp/web/server/HttpRouter.hpp"
-#include "oatpp/network/client/SimpleTCPConnectionProvider.hpp"
-#include "oatpp/network/server/SimpleTCPConnectionProvider.hpp"
+#include "oatpp/network/tcp/client/ConnectionProvider.hpp"
+#include "oatpp/network/tcp/server/ConnectionProvider.hpp"
 
 #include "oatpp/parser/json/mapping/Serializer.hpp"
 #include "oatpp/parser/json/mapping/Deserializer.hpp"
@@ -26,7 +26,7 @@ public:
    *  Create ConnectionProvider component which listens on the port
    */
   OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::network::ServerConnectionProvider>, serverConnectionProvider)([] {
-    return oatpp::network::server::SimpleTCPConnectionProvider::createShared(8000);
+    return oatpp::network::tcp::server::ConnectionProvider::createShared({"localhost", 8000});
   }());
   
   /**
@@ -39,7 +39,7 @@ public:
   /**
    *  Create ConnectionHandler component which uses Router component to route requests
    */
-  OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::network::server::ConnectionHandler>, serverConnectionHandler)([] {
+  OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::network::ConnectionHandler>, serverConnectionHandler)([] {
     OATPP_COMPONENT(std::shared_ptr<oatpp::web::server::HttpRouter>, router); // get Router component
     return oatpp::web::server::HttpConnectionHandler::createShared(router);
   }());
@@ -69,7 +69,7 @@ public:
 
     // Create connection provider for Consul
     // In case you need secure connection provider so you can connect to Consul via https see oatpp-libressl and tls-libressl example project
-    auto connectionProvider = oatpp::network::client::SimpleTCPConnectionProvider::createShared("localhost", 8500);
+    auto connectionProvider = oatpp::network::tcp::client::ConnectionProvider::createShared({"localhost", 8500});
     
     // Create httpRequestExecutor
     auto requestExecutor = oatpp::web::client::HttpRequestExecutor::createShared(connectionProvider);
